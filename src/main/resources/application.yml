@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: Beeline
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:h2:file:./camunda-h2-database
+  jpa:
+    hibernate:
+      ddl-auto: none
+    defer-datasource-initialization: true
+    open-in-view: false
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
+
+camunda:
+  bpm:
+    auto-deployment-enabled: true
+    default-serialization-format: application/json
+    database:
+      type: h2

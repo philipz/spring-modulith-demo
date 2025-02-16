@@ -5,7 +5,21 @@ spring:
     init:
       mode: always
   datasource:
-    url: jdbc:h2:mem:camunda;DB_CLOSE_DELAY=1000
+    jdbc-url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 10000
+      max-lifetime: 600000
+    camunda:
+      jdbc-url: jdbc:h2:mem:camunda;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_MODE=1;LOCK_TIMEOUT=10000;QUERY_CACHE_SIZE=100;CACHE_SIZE=131072;MULTI_THREADED=TRUE;MVCC=TRUE;COMPRESS=TRUE;IGNORE_UNKNOWN_SETTINGS=TRUE
+      username: sa
+      password: password
+      driver-class-name: org.h2.Driver 
   jpa:
     hibernate:
       ddl-auto: none
@@ -16,14 +30,12 @@ springdoc:
   api-docs:
     path: /api-docs
 
-camunda.bpm.admin-user:
-  id: demo
-  password: demo
-
 camunda:
   bpm:
+    admin-user:
+      id: demo
+      password: demo
     auto-deployment-enabled: true
     default-serialization-format: application/json
     database:
       type: h2
-
